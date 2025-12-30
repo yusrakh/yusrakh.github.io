@@ -46,7 +46,7 @@ I am a motivated and detail-oriented Computer Information Systems (CIS) student 
 * Worked on Reinforcement Learning projects and gained hands-on experience in technical skills.
 
 **Intern | Pakistan Engineers Forum (PEF)**
-*(12/2024 - Present)*
+*(12/2024 - 02/2025)*
 * WordPress CMS based Web Development (PHP, MySQL).
 * Desktop and Mobile friendly UI/UX Design.
 
