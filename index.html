@@ -7,10 +7,11 @@
     <style>
         /* --- RESET & BASICS --- */
         :root {
-            --bg-color: #121212; /* Deep Black */
-            --text-main: #EAEAEA; /* Off-White */
-            --accent: #D4D4D4; /* Muted Grey */
-            --highlight: #ffffff;
+            --bg-color: #121212; /* Deep Black for the main body */
+            --header-bg: #f4f4f4; /* Light Gray for Header */
+            --text-main: #EAEAEA; /* Off-White for dark sections */
+            --text-dark: #1a1a1a; /* Dark text for light header */
+            --accent: #D4D4D4; 
         }
 
         body {
@@ -25,109 +26,16 @@
         a { text-decoration: none; color: inherit; }
         ul { list-style: none; padding: 0; }
 
-        /* --- ANIMATIONS --- */
-        @keyframes fadeInUp {
-            from { opacity: 0; transform: translateY(40px); }
-            to { opacity: 1; transform: translateY(0); }
-        }
-
-        .animate-load {
-            animation: fadeInUp 1s ease-out forwards;
-            opacity: 0; /* Start hidden */
-        }
-/* --- Layout Styling (Matches your screenshot) --- */
-.what-i-do-section {
-    background-color: #0d0d0d; /* Dark background */
-    color: #ffffff;
-    padding: 100px 10%; /* Adjust padding as needed */
-    font-family: 'Helvetica Neue', Arial, sans-serif; /* Or your preferred font */
-}
-
-.section-title {
-    font-size: 3rem;
-    font-weight: 700;
-    margin-bottom: 60px;
-    text-transform: uppercase;
-}
-
-.service-item {
-    display: flex;
-    justify-content: space-between;
-    align-items: flex-start; /* Aligns text to top if description is long */
-    border-bottom: 1px solid #333;
-    padding: 40px 0;
-    transition: background 0.3s ease; /* Subtle hover effect */
-}
-
-.service-item:hover {
-    background-color: #1a1a1a; /* Slight highlight on hover */
-}
-
-.service-left {
-    display: flex;
-    align-items: baseline;
-    gap: 20px;
-    flex: 1;
-}
-
-.service-num {
-    color: #555; /* Darker grey for number */
-    font-size: 1.2rem;
-    font-family: monospace;
-}
-
-.service-name {
-    font-size: 2rem;
-    font-weight: 600;
-    margin: 0;
-}
-
-.service-right {
-    flex: 1;
-    text-align: right;
-    max-width: 500px;
-}
-
-.service-right p {
-    color: #aaa; /* Light grey for description */
-    font-size: 1rem;
-    line-height: 1.6;
-    margin: 0;
-}
-
-/* --- ANIMATION CLASSES --- */
-/* This is the state BEFORE the element is seen */
-.hidden {
-    opacity: 0;
-    transform: translateY(50px); /* Pushes it down slightly */
-    transition: all 1s ease-out; /* Smooth transition duration */
-    filter: blur(5px); /* Optional: adds a nice blur in effect */
-}
-
-/* This is the state AFTER the element is seen */
-.show {
-    opacity: 1;
-    transform: translateY(0);
-    filter: blur(0);
-}
-
-/* Responsive fix for mobile */
-@media (max-width: 768px) {
-    .service-item {
-        flex-direction: column;
-        gap: 20px;
-    }
-    .service-right {
-        text-align: left;
-    }
-}
-        /* --- HEADER / HERO SECTION --- */
+        /* --- HEADER / HERO SECTION (Light Theme) --- */
         header {
             height: 90vh;
             display: flex;
             flex-direction: column;
             justify-content: center;
             padding: 0 5%;
+            background-color: var(--header-bg); /* Light Gray Background */
+            color: var(--text-dark); /* Dark Text */
+            position: relative;
         }
 
         .nav-top {
@@ -139,7 +47,7 @@
             font-size: 0.9rem;
             text-transform: uppercase;
             letter-spacing: 1px;
-            color: var(--accent);
+            color: #555; /* Dark Grey for nav */
         }
 
         .big-name {
@@ -149,48 +57,106 @@
             text-transform: uppercase;
             margin: 0;
             letter-spacing: -3px;
-            color: var(--text-main);
+            color: #000; /* Pitch Black for contrast */
         }
 
         .role-title {
             font-size: 1.5rem;
             margin-top: 20px;
-            color: var(--accent);
-            animation-delay: 0.3s;
+            color: #444; /* Dark Grey */
         }
 
-        /* --- SECTIONS --- */
+        /* --- INITIAL LOAD ANIMATION (Header Only) --- */
+        @keyframes fadeInUp {
+            from { opacity: 0; transform: translateY(40px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .animate-load {
+            animation: fadeInUp 1s ease-out forwards;
+            opacity: 0; /* Start hidden */
+        }
+
+        /* --- GENERAL SECTIONS --- */
         section {
-            padding: 100px 5%;
+            padding: 100px 10%; /* Matches your screenshot layout */
             border-top: 1px solid #333;
         }
 
+        /* Specific style for "What I Do" to match dark theme */
+        .what-i-do-section {
+            background-color: #0d0d0d; 
+            color: #ffffff;
+        }
+
         .section-title {
-            font-size: 4rem;
+            font-size: 3rem;
             font-weight: 700;
             margin-bottom: 60px;
             text-transform: uppercase;
         }
 
-        /* --- SERVICES / SKILLS (The "01, 02" Look) --- */
-        .skill-row {
+        /* --- SCROLL ANIMATION CLASSES --- */
+        /* Elements start hidden, slightly lower, and blurred */
+        .hidden {
+            opacity: 0;
+            transform: translateY(50px);
+            transition: all 0.8s ease-out;
+            filter: blur(5px);
+        }
+
+        /* When visible, they slide up and sharpen */
+        .show {
+            opacity: 1;
+            transform: translateY(0);
+            filter: blur(0);
+        }
+
+        /* --- SERVICE ITEMS (What I Do) --- */
+        .service-item {
             display: flex;
             justify-content: space-between;
-            align-items: center;
-            padding: 40px 0;
+            align-items: flex-start;
             border-bottom: 1px solid #333;
-            transition: all 0.4s ease;
-            cursor: pointer;
+            padding: 40px 0;
+            transition: background 0.3s ease;
         }
 
-        .skill-row:hover {
-            background-color: #1f1f1f;
-            padding-left: 20px; /* Slide effect */
+        .service-item:hover {
+            background-color: #1a1a1a;
         }
 
-        .skill-number { font-size: 1.5rem; color: #555; margin-right: 20px; }
-        .skill-name { font-size: 3rem; font-weight: 600; }
-        .skill-desc { font-size: 1rem; color: #888; max-width: 400px; text-align: right; }
+        .service-left {
+            display: flex;
+            align-items: baseline;
+            gap: 20px;
+            flex: 1;
+        }
+
+        .service-num {
+            color: #555;
+            font-size: 1.2rem;
+            font-family: monospace;
+        }
+
+        .service-name {
+            font-size: 2rem;
+            font-weight: 600;
+            margin: 0;
+        }
+
+        .service-right {
+            flex: 1;
+            text-align: right;
+            max-width: 500px;
+        }
+
+        .service-right p {
+            color: #aaa;
+            font-size: 1rem;
+            line-height: 1.6;
+            margin: 0;
+        }
 
         /* --- PROJECTS GRID --- */
         .project-grid {
@@ -203,18 +169,19 @@
             background-color: #1a1a1a;
             padding: 40px;
             border-radius: 4px;
-            transition: transform 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275); /* Bouncy hover */
+            transition: transform 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
             border: 1px solid #333;
         }
 
         .project-card:hover {
-            transform: translateY(-15px) scale(1.02); /* LIFT UP Animation */
+            transform: translateY(-15px) scale(1.02);
             border-color: #fff;
             box-shadow: 0 20px 40px rgba(0,0,0,0.5);
         }
 
-        .project-card h3 { font-size: 2rem; margin-bottom: 10px; }
+        .project-card h3 { font-size: 2rem; margin-bottom: 10px; margin-top: 0; }
         .project-card p { color: #aaa; line-height: 1.5; }
+        
         .tech-tag {
             display: inline-block;
             margin-top: 20px;
@@ -248,17 +215,17 @@
         }
 
         .btn-main:hover {
-            transform: scale(1.1); /* Grow on hover */
+            transform: scale(1.1);
             background-color: #fff;
             box-shadow: 0 0 20px rgba(255,255,255,0.4);
         }
 
-        /* Mobile Adjustments */
+        /* --- RESPONSIVE --- */
         @media (max-width: 768px) {
             .big-name { font-size: 15vw; }
-            .skill-name { font-size: 1.5rem; }
-            .skill-row { flex-direction: column; align-items: flex-start; gap: 10px; }
-            .skill-desc { text-align: left; }
+            .service-item { flex-direction: column; gap: 20px; }
+            .service-right { text-align: left; }
+            section { padding: 60px 5%; }
         }
     </style>
 </head>
@@ -279,95 +246,78 @@
         </div>
     </header>
 
-    <section>
-        <h2 class="section-title">What I Do /</h2>
-        
-        <div class="skill-row">
-            <div><span class="skill-number">(01)</span> <span class="skill-name">Full-Stack Dev</span></div>
-            <div class="skill-desc">Building fast, reliable web apps using Django, Flask, & React.</div>
-        </div>
+    <section class="what-i-do-section">
+        <h2 class="section-title hidden">WHAT I DO /</h2>
 
-        <div class="skill-row">
-            <div><span class="skill-number">(02)</span> <span class="skill-name">Machine Learning</span></div>
-            <div class="skill-desc">Creating intelligent models (RL, Neural Networks) that solve real problems.</div>
-        </div>
+        <div class="services-container">
+            
+            <div class="service-item hidden">
+                <div class="service-left">
+                    <span class="service-num">(01)</span>
+                    <h3 class="service-name">Full-Stack Dev</h3>
+                </div>
+                <div class="service-right">
+                    <p>
+                        Architecting end-to-end solutions that scale. I bridge the gap between 
+                        complex back-end logic (Django/Flask) and responsive, user-centric 
+                        front-end designs (React).
+                    </p>
+                </div>
+            </div>
 
-        <div class="skill-row">
-            <div><span class="skill-number">(03)</span> <span class="skill-name">Hardware & IoT</span></div>
-            <div class="skill-desc">Connecting the physical world with code (PCB Design, Sensors, ESP32).</div>
+            <div class="service-item hidden">
+                <div class="service-left">
+                    <span class="service-num">(02)</span>
+                    <h3 class="service-name">Machine Learning</h3>
+                </div>
+                <div class="service-right">
+                    <p>
+                        Turning raw data into actionable insights. I design custom neural networks 
+                        and RL agents to automate complex decision-making processes for real-world scenarios.
+                    </p>
+                </div>
+            </div>
+
+            <div class="service-item hidden">
+                <div class="service-left">
+                    <span class="service-num">(03)</span>
+                    <h3 class="service-name">Hardware & IoT</h3>
+                </div>
+                <div class="service-right">
+                    <p>
+                        Bridging the gap between bits and atoms. I design custom PCBs and 
+                        embedded firmware (ESP32) to create smart devices that interact 
+                        seamlessly with the physical environment.
+                    </p>
+                </div>
+            </div>
+
         </div>
     </section>
-<section class="what-i-do-section">
-    <h2 class="section-title hidden">WHAT I DO /</h2>
 
-    <div class="services-container">
-        
-        <div class="service-item hidden">
-            <div class="service-left">
-                <span class="service-num">(01)</span>
-                <h3 class="service-name">Full-Stack Dev</h3>
-            </div>
-            <div class="service-right">
-                <p>
-                    Architecting end-to-end solutions that scale. I bridge the gap between 
-                    complex back-end logic (Django/Flask) and responsive, user-centric 
-                    front-end designs (React).
-                </p>
-            </div>
-        </div>
-
-        <div class="service-item hidden">
-            <div class="service-left">
-                <span class="service-num">(02)</span>
-                <h3 class="service-name">Machine Learning</h3>
-            </div>
-            <div class="service-right">
-                <p>
-                    Turning raw data into actionable insights. I design custom neural networks 
-                    and RL agents to automate complex decision-making processes for real-world scenarios.
-                </p>
-            </div>
-        </div>
-
-        <div class="service-item hidden">
-            <div class="service-left">
-                <span class="service-num">(03)</span>
-                <h3 class="service-name">Hardware & IoT</h3>
-            </div>
-            <div class="service-right">
-                <p>
-                    Bridging the gap between bits and atoms. I design custom PCBs and 
-                    embedded firmware (ESP32) to create smart devices that interact 
-                    seamlessly with the physical environment.
-                </p>
-            </div>
-        </div>
-
-    </div>
-</section>
     <section>
-        <h2 class="section-title">Selected Works /</h2>
+        <h2 class="section-title hidden">Selected Works /</h2>
         <div class="project-grid">
             
-            <div class="project-card">
+            <div class="project-card hidden">
                 <h3>RunGait Pro</h3>
                 <p>An intelligent footwear system for athletes. Uses IoT sensors to analyze foot strike patterns and prevent injuries in real-time.</p>
                 <span class="tech-tag">IoT / Python / Dashboard</span>
             </div>
 
-            <div class="project-card">
+            <div class="project-card hidden">
                 <h3>Weather AI</h3>
                 <p>A multiclass classification system that predicts complex weather conditions (Clear, Rainy, Overcast) using historical data.</p>
                 <span class="tech-tag">Machine Learning / KNN</span>
             </div>
 
-            <div class="project-card">
+            <div class="project-card hidden">
                 <h3>Dynamic Bakery</h3>
                 <p>A complete backend management system for a bakery, handling inventory, orders, and user management.</p>
                 <span class="tech-tag">Django / MySQL</span>
             </div>
 
-            <div class="project-card">
+            <div class="project-card hidden">
                 <h3>Suparco RL Agent</h3>
                 <p>Developed a Reinforcement Learning agent to solve the Classic Cart-Pole problem using PPO algorithms.</p>
                 <span class="tech-tag">AI Research</span>
@@ -377,15 +327,16 @@
     </section>
 
     <section style="border-bottom: none;">
-        <h2 class="section-title">Let's Talk /</h2>
-        <div class="contact-box">
+        <h2 class="section-title hidden">Let's Talk /</h2>
+        
+        <div class="contact-box hidden">
             <h3 style="font-size: 2.5rem; margin: 0;">Have an idea?</h3>
             <p style="color: #888; margin-top: 10px;">I am always open to discussing new projects, creative ideas, or opportunities.</p>
             
             <a href="mailto:yusrakhalid825@gmail.com" class="btn-main">Get in Touch</a>
         </div>
         
-        <div style="margin-top: 50px; display: flex; justify-content: space-between; color: #555;">
+        <div class="hidden" style="margin-top: 50px; display: flex; justify-content: space-between; color: #555;">
             <span>© 2025 Yusra Khalid</span>
             <span><a href="https://github.com/yusrakh">GitHub</a> &nbsp; / &nbsp; <a href="#">LinkedIn</a></span>
         </div>
@@ -393,18 +344,15 @@
 
 </body>
 
-    <script>
+<script>
     // Create the observer
     const observer = new IntersectionObserver((entries) => {
         entries.forEach((entry) => {
-            console.log(entry) // Debugging
             if (entry.isIntersecting) {
                 // Add the 'show' class to trigger the animation
                 entry.target.classList.add('show');
             } else {
-                // Optional: Remove this 'else' block if you want the animation 
-                // to happen only once. Keep it if you want it to re-animate 
-                // every time you scroll up and down.
+                // Remove this else block if you want the animation to run ONLY once
                 entry.target.classList.remove('show'); 
             }
         });
