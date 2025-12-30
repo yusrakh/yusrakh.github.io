@@ -35,7 +35,92 @@
             animation: fadeInUp 1s ease-out forwards;
             opacity: 0; /* Start hidden */
         }
+/* --- Layout Styling (Matches your screenshot) --- */
+.what-i-do-section {
+    background-color: #0d0d0d; /* Dark background */
+    color: #ffffff;
+    padding: 100px 10%; /* Adjust padding as needed */
+    font-family: 'Helvetica Neue', Arial, sans-serif; /* Or your preferred font */
+}
 
+.section-title {
+    font-size: 3rem;
+    font-weight: 700;
+    margin-bottom: 60px;
+    text-transform: uppercase;
+}
+
+.service-item {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start; /* Aligns text to top if description is long */
+    border-bottom: 1px solid #333;
+    padding: 40px 0;
+    transition: background 0.3s ease; /* Subtle hover effect */
+}
+
+.service-item:hover {
+    background-color: #1a1a1a; /* Slight highlight on hover */
+}
+
+.service-left {
+    display: flex;
+    align-items: baseline;
+    gap: 20px;
+    flex: 1;
+}
+
+.service-num {
+    color: #555; /* Darker grey for number */
+    font-size: 1.2rem;
+    font-family: monospace;
+}
+
+.service-name {
+    font-size: 2rem;
+    font-weight: 600;
+    margin: 0;
+}
+
+.service-right {
+    flex: 1;
+    text-align: right;
+    max-width: 500px;
+}
+
+.service-right p {
+    color: #aaa; /* Light grey for description */
+    font-size: 1rem;
+    line-height: 1.6;
+    margin: 0;
+}
+
+/* --- ANIMATION CLASSES --- */
+/* This is the state BEFORE the element is seen */
+.hidden {
+    opacity: 0;
+    transform: translateY(50px); /* Pushes it down slightly */
+    transition: all 1s ease-out; /* Smooth transition duration */
+    filter: blur(5px); /* Optional: adds a nice blur in effect */
+}
+
+/* This is the state AFTER the element is seen */
+.show {
+    opacity: 1;
+    transform: translateY(0);
+    filter: blur(0);
+}
+
+/* Responsive fix for mobile */
+@media (max-width: 768px) {
+    .service-item {
+        flex-direction: column;
+        gap: 20px;
+    }
+    .service-right {
+        text-align: left;
+    }
+}
         /* --- HEADER / HERO SECTION --- */
         header {
             height: 90vh;
@@ -212,7 +297,54 @@
             <div class="skill-desc">Connecting the physical world with code (PCB Design, Sensors, ESP32).</div>
         </div>
     </section>
+<section class="what-i-do-section">
+    <h2 class="section-title hidden">WHAT I DO /</h2>
 
+    <div class="services-container">
+        
+        <div class="service-item hidden">
+            <div class="service-left">
+                <span class="service-num">(01)</span>
+                <h3 class="service-name">Full-Stack Dev</h3>
+            </div>
+            <div class="service-right">
+                <p>
+                    Architecting end-to-end solutions that scale. I bridge the gap between 
+                    complex back-end logic (Django/Flask) and responsive, user-centric 
+                    front-end designs (React).
+                </p>
+            </div>
+        </div>
+
+        <div class="service-item hidden">
+            <div class="service-left">
+                <span class="service-num">(02)</span>
+                <h3 class="service-name">Machine Learning</h3>
+            </div>
+            <div class="service-right">
+                <p>
+                    Turning raw data into actionable insights. I design custom neural networks 
+                    and RL agents to automate complex decision-making processes for real-world scenarios.
+                </p>
+            </div>
+        </div>
+
+        <div class="service-item hidden">
+            <div class="service-left">
+                <span class="service-num">(03)</span>
+                <h3 class="service-name">Hardware & IoT</h3>
+            </div>
+            <div class="service-right">
+                <p>
+                    Bridging the gap between bits and atoms. I design custom PCBs and 
+                    embedded firmware (ESP32) to create smart devices that interact 
+                    seamlessly with the physical environment.
+                </p>
+            </div>
+        </div>
+
+    </div>
+</section>
     <section>
         <h2 class="section-title">Selected Works /</h2>
         <div class="project-grid">
@@ -260,4 +392,28 @@
     </section>
 
 </body>
+
+    <script>
+    // Create the observer
+    const observer = new IntersectionObserver((entries) => {
+        entries.forEach((entry) => {
+            console.log(entry) // Debugging
+            if (entry.isIntersecting) {
+                // Add the 'show' class to trigger the animation
+                entry.target.classList.add('show');
+            } else {
+                // Optional: Remove this 'else' block if you want the animation 
+                // to happen only once. Keep it if you want it to re-animate 
+                // every time you scroll up and down.
+                entry.target.classList.remove('show'); 
+            }
+        });
+    });
+
+    // Select all elements with the 'hidden' class
+    const hiddenElements = document.querySelectorAll('.hidden');
+
+    // Tell the observer to watch them
+    hiddenElements.forEach((el) => observer.observe(el));
+</script>
 </html>
