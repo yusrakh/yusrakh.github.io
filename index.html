@@ -8,10 +8,14 @@
         /* --- RESET & BASICS --- */
         :root {
             --bg-color: #121212; /* Deep Black for the main body */
-            --header-bg: #f4f4f4; /* Light Gray for Header */
+            --header-bg: #EAEAEA; /* Light Off-White for Header */
             --text-main: #EAEAEA; /* Off-White for dark sections */
             --text-dark: #1a1a1a; /* Dark text for light header */
             --accent: #D4D4D4; 
+        }
+
+        html {
+            scroll-behavior: smooth; /* Enables smooth scrolling */
         }
 
         body {
@@ -26,47 +30,130 @@
         a { text-decoration: none; color: inherit; }
         ul { list-style: none; padding: 0; }
 
-        /* --- HEADER / HERO SECTION (Light Theme) --- */
+        /* --- HEADER / HERO SECTION (New Design) --- */
         header {
-            height: 90vh;
-            display: flex;
-            flex-direction: column;
-            justify-content: center;
-            padding: 0 5%;
-            background-color: var(--header-bg); /* Light Gray Background */
-            color: var(--text-dark); /* Dark Text */
+            min-height: 100vh;
+            display: grid;
+            grid-template-columns: 1fr 1fr; /* Two columns */
+            grid-template-rows: auto 1fr auto; /* Nav, Main Content, Footer-like info */
+            padding: 40px 5%;
+            background-color: var(--header-bg);
+            color: var(--text-dark);
+            box-sizing: border-box;
             position: relative;
         }
 
+        /* Top Navigation */
         .nav-top {
-            position: absolute;
-            top: 40px;
-            width: 90%;
+            grid-column: 1 / -1;
             display: flex;
             justify-content: space-between;
+            align-items: center;
             font-size: 0.9rem;
             text-transform: uppercase;
             letter-spacing: 1px;
-            color: #555; /* Dark Grey for nav */
+            color: #555;
+            margin-bottom: 60px;
         }
 
+        .nav-links a {
+            margin-left: 30px;
+            font-weight: 500;
+            color: var(--text-dark);
+        }
+
+        /* Main Title */
         .big-name {
-            font-size: 11vw; /* Responsive Huge Text */
+            grid-column: 1 / -1;
+            font-size: 13vw;
             font-weight: 800;
-            line-height: 0.9;
+            line-height: 0.85;
             text-transform: uppercase;
-            margin: 0;
-            letter-spacing: -3px;
-            color: #000; /* Pitch Black for contrast */
+            margin: 0 0 40px 0;
+            letter-spacing: -4px;
+            color: #000;
+            text-align: center;
+        }
+
+        /* Left Content Column */
+        .hero-left {
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            padding-right: 40px;
         }
 
         .role-title {
-            font-size: 1.5rem;
-            margin-top: 20px;
-            color: #444; /* Dark Grey */
+            font-size: 1.2rem;
+            font-weight: 500;
+            margin-bottom: 20px;
+            color: #444;
         }
 
-        /* --- INITIAL LOAD ANIMATION (Header Only) --- */
+        .hero-description {
+            font-size: 1.5rem;
+            line-height: 1.4;
+            max-width: 500px;
+            margin-bottom: 40px;
+            color: #333;
+        }
+
+        .btn-contact {
+            display: inline-block;
+            background-color: #000;
+            color: #fff;
+            padding: 15px 35px;
+            font-size: 1rem;
+            font-weight: 700;
+            text-transform: uppercase;
+            border-radius: 50px;
+            transition: background-color 0.3s;
+            align-self: flex-start;
+        }
+
+        .btn-contact:hover {
+            background-color: #333;
+        }
+
+        /* Center Image */
+        .hero-image-container {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .hero-image {
+            max-width: 100%;
+            height: auto;
+            max-height: 600px;
+            object-fit: cover;
+            border-radius: 8px;
+        }
+
+        /* Bottom Right Info */
+        .hero-bottom-right {
+            grid-column: 2;
+            text-align: right;
+            align-self: end;
+            margin-top: 40px;
+        }
+
+        .available-text {
+            font-size: 0.9rem;
+            color: #555;
+            margin-bottom: 5px;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .available-date {
+            font-size: 4rem;
+            font-weight: 800;
+            line-height: 1;
+            color: #000;
+        }
+
+        /* --- INITIAL LOAD ANIMATION --- */
         @keyframes fadeInUp {
             from { opacity: 0; transform: translateY(40px); }
             to { opacity: 1; transform: translateY(0); }
@@ -74,19 +161,13 @@
 
         .animate-load {
             animation: fadeInUp 1s ease-out forwards;
-            opacity: 0; /* Start hidden */
+            opacity: 0;
         }
 
         /* --- GENERAL SECTIONS --- */
         section {
-            padding: 100px 10%; /* Matches your screenshot layout */
+            padding: 100px 10%;
             border-top: 1px solid #333;
-        }
-
-        /* Specific style for "What I Do" to match dark theme */
-        .what-i-do-section {
-            background-color: #0d0d0d; 
-            color: #ffffff;
         }
 
         .section-title {
@@ -97,7 +178,6 @@
         }
 
         /* --- SCROLL ANIMATION CLASSES --- */
-        /* Elements start hidden, slightly lower, and blurred */
         .hidden {
             opacity: 0;
             transform: translateY(50px);
@@ -105,7 +185,6 @@
             filter: blur(5px);
         }
 
-        /* When visible, they slide up and sharpen */
         .show {
             opacity: 1;
             transform: translateY(0);
@@ -113,6 +192,11 @@
         }
 
         /* --- SERVICE ITEMS (What I Do) --- */
+        .what-i-do-section {
+            background-color: #0d0d0d; 
+            color: #ffffff;
+        }
+
         .service-item {
             display: flex;
             justify-content: space-between;
@@ -221,8 +305,14 @@
         }
 
         /* --- RESPONSIVE --- */
-        @media (max-width: 768px) {
+        @media (max-width: 900px) {
+            header { grid-template-columns: 1fr; text-align: center; }
             .big-name { font-size: 15vw; }
+            .hero-left { padding-right: 0; align-items: center; order: 2; }
+            .btn-contact { align-self: center; }
+            .hero-image-container { order: 1; margin-bottom: 40px; }
+            .hero-bottom-right { grid-column: 1; text-align: center; order: 3; }
+            
             .service-item { flex-direction: column; gap: 20px; }
             .service-right { text-align: left; }
             section { padding: 60px 5%; }
@@ -233,24 +323,40 @@
 
     <header>
         <div class="nav-top animate-load" style="animation-delay: 0.1s;">
-            <span>Karachi, PK</span>
-            <span>Available for Work '26</span>
+            <span>Web Developer & CIS Engineer</span>
+            <div class="nav-links">
+                <a href="#services">Services</a>
+                <a href="#works">Works</a>
+                <a href="#about">About</a>
+                <a href="#contact">Contact</a>
+            </div>
         </div>
         
         <h1 class="big-name animate-load" style="animation-delay: 0.2s;">
-            YUSRA<br>KHALID
+            YUSRA KHALID
         </h1>
+
+        <div class="hero-left animate-load" style="animation-delay: 0.4s;">
+            <div class="role-title">Computer & Info Systems Engineer</div>
+            <p class="hero-description">
+                Open to job opportunities worldwide. Passionate about building polished, intuitive, and thoughtful digital experiences that leave a mark.
+            </p>
+            <a href="#contact" class="btn-contact">CONTACT ↗</a>
+        </div>
         
-        <div class="role-title animate-load" style="animation-delay: 0.4s;">
-            Computer & Info Systems Engineer
+        <div class="hero-image-container animate-load" style="animation-delay: 0.5s;">
+            <img src="https://via.placeholder.com/500x600/cccccc/969696?text=Your+Image" alt="Yusra Khalid" class="hero-image">
+        </div>
+
+        <div class="hero-bottom-right animate-load" style="animation-delay: 0.6s;">
+            <div class="available-text">AVAILABLE FOR WORK</div>
+            <div class="available-date">JUN '26</div>
         </div>
     </header>
 
-    <section class="what-i-do-section">
+    <section id="services" class="what-i-do-section">
         <h2 class="section-title hidden">WHAT I DO /</h2>
-
         <div class="services-container">
-            
             <div class="service-item hidden">
                 <div class="service-left">
                     <span class="service-num">(01)</span>
@@ -264,7 +370,6 @@
                     </p>
                 </div>
             </div>
-
             <div class="service-item hidden">
                 <div class="service-left">
                     <span class="service-num">(02)</span>
@@ -277,7 +382,6 @@
                     </p>
                 </div>
             </div>
-
             <div class="service-item hidden">
                 <div class="service-left">
                     <span class="service-num">(03)</span>
@@ -291,77 +395,62 @@
                     </p>
                 </div>
             </div>
-
         </div>
     </section>
 
-    <section>
+    <section id="works">
         <h2 class="section-title hidden">Selected Works /</h2>
         <div class="project-grid">
-            
             <div class="project-card hidden">
                 <h3>RunGait Pro</h3>
                 <p>An intelligent footwear system for athletes. Uses IoT sensors to analyze foot strike patterns and prevent injuries in real-time.</p>
                 <span class="tech-tag">IoT / Python / Dashboard</span>
             </div>
-
             <div class="project-card hidden">
                 <h3>Weather AI</h3>
                 <p>A multiclass classification system that predicts complex weather conditions (Clear, Rainy, Overcast) using historical data.</p>
                 <span class="tech-tag">Machine Learning / KNN</span>
             </div>
-
             <div class="project-card hidden">
                 <h3>Dynamic Bakery</h3>
                 <p>A complete backend management system for a bakery, handling inventory, orders, and user management.</p>
                 <span class="tech-tag">Django / MySQL</span>
             </div>
-
             <div class="project-card hidden">
                 <h3>Suparco RL Agent</h3>
                 <p>Developed a Reinforcement Learning agent to solve the Classic Cart-Pole problem using PPO algorithms.</p>
                 <span class="tech-tag">AI Research</span>
             </div>
-
         </div>
     </section>
 
-    <section style="border-bottom: none;">
+    <section id="contact" style="border-bottom: none;">
         <h2 class="section-title hidden">Let's Talk /</h2>
-        
         <div class="contact-box hidden">
             <h3 style="font-size: 2.5rem; margin: 0;">Have an idea?</h3>
             <p style="color: #888; margin-top: 10px;">I am always open to discussing new projects, creative ideas, or opportunities.</p>
-            
             <a href="mailto:yusrakhalid825@gmail.com" class="btn-main">Get in Touch</a>
         </div>
-        
         <div class="hidden" style="margin-top: 50px; display: flex; justify-content: space-between; color: #555;">
             <span>© 2025 Yusra Khalid</span>
-            <span><a href="https://github.com/yusrakh">GitHub</a> &nbsp; / &nbsp; <a href="www.linkedin.com/in/yusra-khalid-294795279">LinkedIn</a></span>
+            <span><a href="https://github.com/yusrakh">GitHub</a> &nbsp; / &nbsp; <a href="#">LinkedIn</a></span>
         </div>
     </section>
 
 </body>
 
 <script>
-    // Create the observer
     const observer = new IntersectionObserver((entries) => {
         entries.forEach((entry) => {
             if (entry.isIntersecting) {
-                // Add the 'show' class to trigger the animation
                 entry.target.classList.add('show');
             } else {
-                // Remove this else block if you want the animation to run ONLY once
                 entry.target.classList.remove('show'); 
             }
         });
     });
 
-    // Select all elements with the 'hidden' class
     const hiddenElements = document.querySelectorAll('.hidden');
-
-    // Tell the observer to watch them
     hiddenElements.forEach((el) => observer.observe(el));
 </script>
 </html>
